@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class LionParamTest {
+
     @Mock
     Feline felineMock;
 
@@ -31,6 +32,7 @@ public class LionParamTest {
         });
     }
 
+    // ЕДИНСТВЕННЫЙ ТЕСТ В ЭТОМ КЛАССЕ - параметризованный
     @Test
     public void testDoesHaveMane() throws Exception {
         Lion lion = new Lion(sex, felineMock);
@@ -38,15 +40,6 @@ public class LionParamTest {
                 expectedHasMane, lion.doesHaveMane());
     }
 
-    @Test
-    public void testConstructorWithInvalidSexThrowsException() {
-        Exception exception = assertThrows(
-                "При создании Lion с полом 'Неизвестно' должно быть выброшено исключение",
-                Exception.class,
-                () -> new Lion("Неизвестно", felineMock)
-        );
-        assertEquals("Текст сообщения об ошибке должен быть корректным",
-                "Используйте допустимые значения пола животного - самец или самка",
-                exception.getMessage());
-    }
+    // Тест testConstructorWithInvalidSexThrowsException() УДАЛЁН отсюда
+    // Он теперь находится в классе LionTest
 }

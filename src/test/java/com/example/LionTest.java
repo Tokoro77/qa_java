@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
+
     @Mock
     Feline felineMock;
 
@@ -28,5 +29,18 @@ public class LionTest {
         Lion lion = new Lion("Самка", felineMock);
         assertEquals("Lion.getFood() должен возвращать список от Feline.getFood('Хищник')",
                 expectedFood, lion.getFood());
+    }
+
+    // ТЕСТ НА ИСКЛЮЧЕНИЕ ПЕРЕНЕСЁН СЮДА ИЗ LionParamTest
+    @Test
+    public void testConstructorWithInvalidSexThrowsException() {
+        Exception exception = assertThrows(
+                "При создании Lion с полом 'Неизвестно' должно быть выброшено исключение",
+                Exception.class,
+                () -> new Lion("Неизвестно", felineMock)
+        );
+        assertEquals("Текст сообщения об ошибке должен быть корректным",
+                "Используйте допустимые значения пола животного - самец или самка",
+                exception.getMessage());
     }
 }
